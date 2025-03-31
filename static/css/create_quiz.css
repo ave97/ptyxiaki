@@ -1,0 +1,169 @@
+.content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-title h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #1D3557;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.quiz_creation {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quiz_creation .form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.quiz_creation label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1D3557;
+    flex: 0 0 150px;
+    /* Πλάτος σταθερό */
+    text-align: right;
+    margin-right: 20px;
+}
+
+.quiz_creation input,
+.quiz_creation select {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+.basics-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-left: -65px;
+}
+
+.flex-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.left {
+    flex: 1;
+}
+
+.right {
+    flex: 2;
+}
+
+.fw {
+    flex: 0 0 100%;
+}
+
+#questionsContainer {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.question {
+    background: #FAFAFA;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.question h3 {
+    flex: 0.5;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.question input[type="text"] {
+    flex: 2;
+    margin-right: 10px;
+}
+
+.question .options {
+    display: flex;
+    gap: 10px;
+    flex: 3;
+}
+
+.question select {
+    flex: 1;
+}
+
+.quiz_creation button {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 10px auto;
+    display: block;
+}
+
+#addQuestion {
+    background-color: #FFD166;
+    color: #333;
+}
+
+#addQuestion:hover {
+    background-color: #EFB800;
+}
+
+.removeQuestion {
+    border: 2px solid red;
+}
+
+.removeQuestion:hover {
+    background-color: rgb(255, 79, 79);
+    color: white
+}
+
+.quiz_creation button[type="submit"] {
+    background-color: #118AB2;
+    color: white;
+}
+
+.quiz_creation button[type="submit"]:hover {
+    background-color: #0d6d9b;
+}
+
+.questions-count {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+    font-weight: bold;
+}

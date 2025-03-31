@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width:device-width, initial-scale=1.0">
+    <title>My Account | EduPlay</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+    <script defer src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+</head>
+
+<body>
+    <!-- <button id="toggleMenu" class="menu-btn">☰ Μενού</button> -->
+    <a href="{{ url_for('home') }}" class="logo-a">
+        <img src="{{ url_for('static', filename='images/logo.webp') }}" alt="EduPlay Logo" class="logo">
+    </a>
+    <div class="sidebar">
+        {% if role == 'student' %}
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('myAccount') }}">My Account</a></li>
+            <li>Progress</li>
+            <li><a href="{{ url_for('logout')}}">Log out</a></li>
+        </ul>
+        {% elif role == 'teacher' %}
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('myAccount') }}">My Account</a></li>
+            <li><a href="{{ url_for('create_quiz') }}">Create Quiz</a></li>
+            <li><a href="{{ url_for('history') }}">History</a></li>
+            <li>My Students</li>
+            <li>Progress</li>
+            <li><a href="{{ url_for('logout')}}">Log out</a></li>
+        </ul>
+        {% endif %}
+    </div>
+
+    <!-- 🔹 Περιεχόμενο της Σελίδας -->
+    <div class="content">
+        <div class="column left">
+            <img src="{{ url_for('static', filename='images/avatars/avatar1.png') }}" alt="avatar1" width="150px">
+            <p>Email: </p>
+        </div>
+        <div class="column middle">
+            <p>Hello again</p>
+        </div>
+        <div class="column right">
+            <p>Hiiiii</p>
+        </div>
+    </div>
+</body>
+
+</html>

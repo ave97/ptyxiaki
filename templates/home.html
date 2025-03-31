@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | EduPlay</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <script defer src="{{ url_for('static', filename='js/login.js') }}"></script>
+</head>
+
+<body>
+
+    <!-- Το Login/Register Popup -->
+    <div id="loginModal" class="modal show" data-register="{{ register if register else 'False'}}" data-error="{{ error if error else '' }}">
+        <div class="modal-content">
+            <!-- Flip Container -->
+            <div class="flip-container">
+                <div class="flipper">
+                    <!-- Login Form (Μπροστινή όψη) -->
+                    <div class="front">
+                        <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+                            <h2>Σύνδεση</h2>
+                            <p id="loginError" class="error-msg" style="display: none;"></p>
+
+                            <label for="login-username">Όνομα χρήστη:</label>
+                            <input type="text" id="login-username" name="username" required>
+
+                            <label for="login-password">Κωδικός:</label>
+                            <input type="password" id="login-password" name="password" required>
+
+                            <button type="submit">Σύνδεση</button>
+                            <p>Δεν έχεις λογαριασμό; <a href="#" id="showRegister">Εγγραφή</a></p>
+                        </form>
+                    </div>
+
+                    <!-- Register Form (Πίσω όψη) -->
+                    <div class="back">
+                        <form id="registerForm" method="POST" action="{{ url_for('register') }}">
+                            <h2>Εγγραφή</h2>
+                            <p id="registerError" class="error-msg" style="display: none;"></p>
+
+                            <label for="register-username">Όνομα χρήστη:</label>
+                            <input type="text" id="register-username" name="username" required>
+
+                            <label for="register-email">Email χρήστη:</label>
+                            <input type="email" id="register-email" name="email" required>
+
+                            <label for="register-password">Κωδικός:</label>
+                            <input type="password" id="register-password" name="password" required>
+
+                            <label for="register-role">Ρόλος:</label>
+                            <div class="roleRegister">
+                                <select id="register-role" name="role" required>
+                                    <option value="student">🎓 Μαθητής</option>
+                                    <option value="teacher">👨‍🏫 Καθηγητής</option>
+                                </select>
+                            </div>
+
+                            <button type="submit">Εγγραφή</button>
+                            <p>Έχεις ήδη λογαριασμό; <a href="#" id="showLogin">Σύνδεση</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

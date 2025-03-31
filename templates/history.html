@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width:device-width, initial-scale=1.0">
+    <title>History | EduPlay</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+    <script defer src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/history.js') }}"></script>
+
+</head>
+
+<body>
+    <a href="{{ url_for('home') }}" class="logo-a">
+        <img src="{{ url_for('static', filename='images/logo.webp') }}" alt="EduPlay Logo" class="logo">
+    </a>
+    <div class="sidebar">
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('myAccount') }}">My Account</a></li>
+            <li><a href="{{ url_for('create_quiz') }}">Create Quiz</a></li>
+            <li><a href="{{ url_for('history') }}">History</a></li>
+            <li>My Students</li>
+            <li>Progress</li>
+            <li><a href="{{ url_for('logout')}}">Log out</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Τα Quiz μου</h1>
+        <div class="cbx-row">
+            <!-- Επιλογή Όλων -->
+            <label class="custom-checkbox">
+                <input type="checkbox" id="selectAll">
+                <span class="checkmark"></span>
+            </label>
+
+            <!-- Μαζικές Ενέργειες -->
+            <button type="button" id="deleteSelected">Delete</button>
+            <button type="button" id="duplicateSelected">Duplicate</button>
+            <button type="button" id="exportCSV">Export</button>
+
+            <!-- Αναζήτηση -->
+            <input type="text" id="searchQuiz" placeholder="Search Quiz...">
+
+            <!-- Φιλτράρισμα -->
+            <select id="sortQuiz">
+                <option value="latest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="title">Alphabetical</option>
+            </select>
+        </div>
+
+        <div class="quiz-container">
+            {% if quizzes %}
+            {% for quiz in quizzes %}
+            <div class="quiz-card" data-quiz-id="{{ quiz['id'] }}">
+                <div class="quiz-card-header">
+                    <h3>{{ quiz['title'] }}</h3>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" class="quiz-card-checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <p>Δημιουργήθηκε: {{ quiz['created_at'] }}</p>
+                <p>Ερωτήσεις: {{ quiz['numOfQuestions'] }}</p>
+                <a href="{{ url_for('get_quiz', quiz_id=quiz['id']) }}" class="view-btn">📊 Προβολή Αποτελεσμάτων</a>
+                <div class="quiz-card-edit">
+                    <button class="quick-edit-btn" data-quiz-id="{{ quiz['id'] }}">Quick Edit</button>
+                    <button class="edit-btn" data-quiz-id="{{ quiz['id'] }}">Edit</button>
+                    <button id="delete-btn" class="delete-btn" type="button">Delete</button>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="quiz-card" style="text-align: center;">
+                <p>There is not a quiz!</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Το Modal για την επεξεργασία του Quiz -->
+        <div id="editQuizModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Edit Quiz</h2>
+                <form id="editQuizForm">
+                    <label for="quizTitle">Quiz Title:</label>
+                    <input type="text" id="quizTitle" name="quizTitle" required>
+
+                    <label for="quizDescription">Description:</label>
+                    <input type="textarea" id="quizDescription" name="quizDescription" required>
+
+                    <label for="quizTime">Time Limit (sec):</label>
+                    <select title="Time to answer questions" id="quizTime" name="quizTime" required>
+                        <option value="15">15 seconds</option>
+                        <option value="20">20 seconds</option>
+                        <option value="25">25 seconds</option>
+                        <option value="30">30 seconds</option>
+                    </select>
+
+                    <div id="questionsContainer"></div>
+
+                    <button type="submit" id="modalSaveBtn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="save-notify-modal" id="saveModal">
+            <div class="modal-content">
+                <p>Changes saved!</p>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

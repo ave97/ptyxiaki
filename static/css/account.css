@@ -1,0 +1,32 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-height: 200px;
+}
+
+.left {
+    background-color: #ffdd57;
+}
+
+.middle {
+    background-color: #57ff86;
+}
+
+.right {
+    background-color: #5796ff;
+}
