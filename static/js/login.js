@@ -1,3 +1,12 @@
+function togglePassword(inputId, icon) {
+    const input = document.getElementById(inputId);
+    const isPassword = input.type === "password";
+    input.type = isPassword ? "text" : "password";
+    icon.classList.toggle("fa-eye");
+    icon.classList.toggle("fa-eye-slash");
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("loginModal");
     const flipContainer = document.querySelector(".flip-container");

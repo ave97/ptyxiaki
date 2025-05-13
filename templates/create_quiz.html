@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/create_quiz.css') }}">
     <script defer src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
     <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
-
 </head>
 
 <body>
-    <a href="{{ url_for('home') }}" class="logo-a">
-        <img src="{{ url_for('static', filename='images/logo.webp') }}" alt="EduPlay Logo" class="logo">
-    </a>
     <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="{{ url_for('home') }}" class="logo-link">
+                <img src="{{ url_for('static', filename='images/logo.webp') }}" class="logo" alt="EduPlay Logo">
+            </a>
+        </div>
         <ul>
             <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
             <li><a href="{{ url_for('myAccount') }}">My Account</a></li>
@@ -38,38 +39,48 @@
             <form id="quizForm" method="POST" action="{{ url_for('save_quiz') }}">
 
                 <div class="basics-container">
-                    <div class="flex-box right">
+                    <div class="flex-box left">
                         <!-- Title -->
                         <label for="quizTitle">Quiz Title: </label>
                         <input type="text" id="quizTitle" name="quizTitle" required>
                     </div>
 
-                    <div class="flex-box left">
-                        <!-- Time setting -->
-                        <label title="Time to answer questions" for="quizTime">Question time limit: </label>
-                        <select title="Time to answer questions" id="quizTime" name="quizTime" required>
-                            <option value="15">15 seconds</option>
-                            <option value="20">20 seconds</option>
-                            <option value="25">25 seconds</option>
-                            <option value="30">30 seconds</option>
+                    <div class="flex-box right">
+                        <!-- Lesson -->
+                        <label for="quizLesson">Lesson: </label>
+                        <select id="quizLesson" name="quizLesson">
+                            <option value="Math">Math</option>
+                            <option value="History">History</option>
+                            <option value="Science">Science</option>
+                            <option value="General">General</option>
                         </select>
-                    </div>
-
-                    <div class="flex-box fw">
-                        <!-- Description -->
-                        <label for="quizDescription">Description: </label>
-                        <input type="textarea" id="quizDescription" name="quizDescription">
                     </div>
                 </div>
 
                 <!-- Quiz -->
                 <div id="questionsContainer">
                     <div class="question">
-                        <h3>Question 1</h3>
-                        <label>Question: </label>
-                        <input type="textarea" name="question_1" required>
+                        <div class="question-type">
+                            <h3>Question 1</h3>
+                            <label>Question Type: </label>
+                            <select id="questionType_1" name="questionType_1" required>
+                                <option value="default">Select Question Type</option>
+                                <option value="multiple_choice">Multiple Choice</option>
+                                <option value="true_false">True/False</option>
+                                <option value="matching">Matching</option>
+                            </select>
+                        </div>
 
-                        <div class="options-container">
+                        <div class="selectQuestionType" id="selectQT_1">
+                            <h4>Please select question type to proceed</h4>
+                        </div>
+
+                        <div class="question-content" id="questionContent_1">
+                            <label for="question_1">Question: </label>
+                            <input id="askQuestion" type="textarea" name="question_1" required>
+                        </div>
+
+                        <div id="optionContainer_1" class="options-container" style="display: none;">
                             <label>Options: </label>
                             <input type="text" name="option_1_1" placeholder="Answer 1" required>
                             <input type="text" name="option_1_2" placeholder="Answer 2" required>
@@ -77,20 +88,40 @@
                             <input type="text" name="option_1_4" placeholder="Answer 4" required>
                         </div>
 
-                        <label>Correct Answer:</label>
-                        <select name="correct_1" required>
-                            <option value="1">Answer 1</option>
-                            <option value="2">Answer 2</option>
-                            <option value="3">Answer 3</option>
-                            <option value="4">Answer 4</option>
-                        </select>
+                        <div id="trueFalseContainer_1" class="true-false-container" style="display: none;">
+                            <label>Answer: </label>
+                            <select name="trueFalseAnswer_1" required>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+
+                        <div id="matchingContainer_1" class="matching-container" style="display: none;">
+                            <label>Match items: </label>
+                            <div class="matching-pair">
+                                <input type="text" name="matching_1_1" placeholder="Item 1" required>
+                                <input type="text" name="matching_1_2" placeholder="Item 2" required>
+                                <button type="button" class="removeMatchingBtn" id="removeMatchingBtn_1">Remove
+                                    Matching</button>
+                            </div>
+                            <button type="button" id="addMatchingBtn_1" class="addMatchingBtn">Add Matching</button>
+                        </div>
+
+                        <!-- Correct Answer (only for multiple choice questions) -->
+                        <div id="correctAnswerContainer_1" class="correct-answer-container" style="display: none;">
+                            <label>Correct Answer:</label>
+                            <select name="correct_1" required>
+                                <option value="1">Answer 1</option>
+                                <option value="2">Answer 2</option>
+                                <option value="3">Answer 3</option>
+                                <option value="4">Answer 4</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Add question button, dynamically -->
                 <button type="button" id="addQuestion">➕ Add Question</button>
 
-                <!-- Submit Quiz -->
                 <button type="submit">Submit Quiz</button>
             </form>
         </div>
